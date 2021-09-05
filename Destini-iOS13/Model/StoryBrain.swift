@@ -9,7 +9,7 @@
 import Foundation
 
 struct StoryBrain {
-    let brain = [
+    let stories = [
         Story(
             title: "Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: 'Need a ride, boy?'.",
             choice1: "I'll hop in. Thanks for the help!", choice1Destination: 2,
@@ -42,10 +42,23 @@ struct StoryBrain {
         )
     ]
     
-    let storyIndex = 0
+    var storyIndex = 0
     
     func getStory() -> Story {
-        return brain[storyIndex]
+        return stories[storyIndex]
+    }
+    
+    mutating func setNextStory(_ selectedStoryChoice: String) {
+        let currentStory = stories[storyIndex]
+        print(currentStory)
+        switch selectedStoryChoice {
+        case currentStory.choice1:
+            storyIndex = currentStory.choice1Destination
+        case currentStory.choice2:
+            storyIndex = currentStory.choice2Destination
+        default:
+            print("Error")
+        }
     }
     
     
